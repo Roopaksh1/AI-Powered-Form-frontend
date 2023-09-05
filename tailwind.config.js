@@ -8,7 +8,7 @@ export default {
         'active-link-color': 'white',
         'user-option-color': 'gray',
         'home-section1-bg': '#27b2ff',
-        'home-section2-bg': '#f8fafc',
+        'home-section2-bg': 'white',
         'home-section3-bg': '#f8fafc',
       },
       fontFamily: {
