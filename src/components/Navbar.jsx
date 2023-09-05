@@ -6,7 +6,7 @@ const NavBar = () => {
   const openBarsOption = () => {};
 
   return (
-    <header className=" bg-[#23bcff] p-2 flex justify-between text-white">
+    <header className=" bg-navbar-bg p-2 flex justify-between text-white">
       <div>
         <Link to="/">
           <div className="inline-block w-10 h-10 rounded-full text-center align-middle leading-9 overflow-hidden">
@@ -21,7 +21,7 @@ const NavBar = () => {
             to={'/'}
             className={({ isActive }) =>
               isActive
-                ? 'border-b-2 border-red-400 '
+                ? 'border-b-2 border-active-link-color '
                 : 'hover:scale-110 transition-transform'
             }
           >
@@ -31,7 +31,7 @@ const NavBar = () => {
             to={'/dashboard'}
             className={({ isActive }) =>
               isActive
-                ? 'border-b-2 border-red-400 scale-110 ml-4'
+                ? 'border-b-2 border-active-link-color ml-4'
                 : 'ml-4 hover:scale-110 transition-transform'
             }
           >
@@ -41,7 +41,7 @@ const NavBar = () => {
             to={'/about'}
             className={({ isActive }) =>
               isActive
-                ? 'border-b-2 border-red-400 scale-110 ml-4'
+                ? 'border-b-2 border-active-link-color ml-4'
                 : 'ml-4 hover:scale-110 transition-transform'
             }
           >
@@ -51,7 +51,7 @@ const NavBar = () => {
             to={'/contact'}
             className={({ isActive }) =>
               isActive
-                ? 'border-b-2 border-red-400 scale-110 ml-4'
+                ? 'border-b-2 border-active-link-color ml-4'
                 : 'ml-4 hover:scale-110 transition-transform'
             }
           >
@@ -65,7 +65,7 @@ const NavBar = () => {
         </button>
         <button
           onClick={openUserOption}
-          className="ml-5 inline-block w-10 h-10 rounded-full bg-[#bdbdbd] text-center align-middle leading-4"
+          className="ml-5 inline-block w-10 h-10 rounded-full bg-user-option-color text-center align-middle leading-4"
         >
           <i className="fa-solid fa-user"></i>
         </button>
