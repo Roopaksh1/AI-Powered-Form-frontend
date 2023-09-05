@@ -13,9 +13,9 @@ const Router = () => {
       element: <NavBar />,
       children: [
         { index: true, element: <Home /> },
-        { index: 'dashboard', element: <Dashboard /> },
-        { index: 'contact', element: <Contact /> },
-        { index: 'about', element: <About /> },
+        { path: 'dashboard', element: <Dashboard /> },
+        { path: 'contact', element: <Contact /> },
+        { path: 'about', element: <About /> },
       ],
     },
     {
