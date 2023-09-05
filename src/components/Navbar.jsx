@@ -1,18 +1,32 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 const NavBar = () => {
   const [burger, setBurger] = useState(false);
   const [userOp, setUSerOp] = useState(false);
+  const navbar = useRef();
+  const userOptions = useRef();
   const openUserOption = () => {
     setUSerOp((prevState) => !prevState);
   };
   const openBarsOption = () => {
     setBurger((prevState) => !prevState);
   };
+  const CloseNavbar = (e) => {
+    if (
+      !userOptions.current.contains(e.target) ||
+      !navbar.current.contains(e.target)
+    ) {
+      setBurger(false);
+      setUSerOp(false);
+    }
+  };
 
   return (
-    <div className='overflow-hidden flex flex-col min-h-screen'>
+    <div
+      className='overflow-hidden flex flex-col min-h-screen'
+      onMouseDown={CloseNavbar}
+    >
       <header className=' bg-navbar-bg p-4 flex justify-between text-white font-Roboto'>
         <div>
           <Link to='/'>
@@ -79,8 +93,9 @@ const NavBar = () => {
         </div>
       </header>
       <div
+        ref={userOptions}
         className={
-          "z-90 absolute w-28 h-auto rounded-md top-16 right-4 float-right md:hidden bg-slate-200" +
+          "z-90 absolute w-28 h-auto rounded-md top-16 right-4 float-right bg-slate-200" +
           (userOp ? "" : " hidden")
         }
       >
@@ -91,6 +106,7 @@ const NavBar = () => {
         </ul>
       </div>
       <div
+        ref={navbar}
         className={
           "bg-slate-100 text-slate-800 w-full md:hidden flex flex-col items-center" +
           (burger ? "" : " hidden")
