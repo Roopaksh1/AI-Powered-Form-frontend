@@ -4,9 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        'navbar-bg': '#23bcff',
-        'active-link-color': '#f87171',
+        'navbar-bg': '#27b2ff',
+        'active-link-color': 'white',
         'user-option-color': 'gray',
+        'home-section1-bg': '#27b2ff',
+        'home-section2-bg': '#f8fafc',
+        'home-section3-bg': '#f8fafc',
+      },
+      fontFamily: {
+        Roboto: ['Roboto', 'sans-serif'],
       },
     },
   },
