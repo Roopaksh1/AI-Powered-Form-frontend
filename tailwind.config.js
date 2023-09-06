@@ -10,6 +10,9 @@ export default {
         'home-section1-bg': '#27b2ff',
         'home-section2-bg': 'white',
         'home-section3-bg': '#f8fafc',
+        'mobile-menu-bg': 'white',
+        'sign-up-color': '#27b2ff',
+        'sign-up-hover-color': '#35A4E0'
       },
       fontFamily: {
         Roboto: ['Roboto', 'sans-serif'],

@@ -5,6 +5,8 @@ import Home from './pages/Home/Home';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Contact from './pages/Contact/Contact';
 import About from './pages/About/About';
+import SignUp from './pages/Signup/Signup';
+import Login from './pages/Login/Login';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -16,6 +18,8 @@ const Router = () => {
         { path: 'dashboard', element: <Dashboard /> },
         { path: 'contact', element: <Contact /> },
         { path: 'about', element: <About /> },
+        { path: 'login', element: <Login /> },
+        { path: 'signup', element: <SignUp /> },
       ],
     },
     {

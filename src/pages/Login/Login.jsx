@@ -19,7 +19,7 @@ const Login = () => {
     })
       .then((res) => {
         toast.success('You have logged in', { toastId: 1 });
-        setUser(res.data);
+        setUser({ auth: true, name: res.data.name });
       })
       .catch((err) => toast.error(err.response.data.message, { toastId: 2 }));
   };
@@ -88,7 +88,7 @@ const Login = () => {
           <div>
             <button
               type='submit'
-              className='flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+              className='flex w-full justify-center rounded-md bg-sign-up-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sign-up-hover-color focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
             >
               Sign in
             </button>
@@ -99,7 +99,7 @@ const Login = () => {
           Not a member?
           <NavLink
             to='/signup'
-            className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
+            className='font-semibold leading-6 text-sign-up-color hover:text-sign-up-hover-color'
           >
             Sign up
           </NavLink>
