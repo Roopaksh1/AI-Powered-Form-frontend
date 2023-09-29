@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../App';
 
 const NavBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [burger, setBurger] = useState(false);
   const [userOp, setUserOp] = useState(false);
   const navbar = useRef();
@@ -67,13 +67,15 @@ const NavBar = () => {
                   >
                     Settings
                   </NavLink>
-                  <NavLink
-                    to={'/'}
+                  <button
                     className='p-1 cursor-pointer'
-                    onClick={toggleUserOption}
+                    onClick={() => {
+                      toggleUserOption();
+                      logOut();
+                    }}
                   >
                     Sign Out
-                  </NavLink>
+                  </button>
                 </ul>
               </div>
             </div>
@@ -208,13 +210,15 @@ const NavBar = () => {
                   >
                     Settings
                   </NavLink>
-                  <NavLink
-                    to={'/'}
+                  <button
                     className='p-1 cursor-pointer'
-                    onClick={toggleUserOption}
+                    onClick={() => {
+                      toggleUserOption();
+                      logOut();
+                    }}
                   >
                     Sign Out
-                  </NavLink>
+                  </button>
                 </ul>
               </div>
             </div>
