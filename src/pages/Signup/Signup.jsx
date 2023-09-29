@@ -54,25 +54,25 @@ const SignUp = () => {
       .catch((err) => toast.error(err.response.data.message));
   };
   return !user.auth ? (
-    <section className='bg-gray-50 dark:bg-gray-900 flex-grow flex justify-center flex-col'>
+    <section className='bg-gray-50 flex-grow flex justify-center flex-col'>
       <div className='flex flex-col items-center justify-center px-6 py-8 lg:py-0'>
         <a
           href='#'
-          className='flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white'
+          className='flex items-center mb-6 text-2xl font-semibold text-gray-900'
         >
           <img className='w-8 h-8 mr-2' src={image} alt='logo' />
           AI-Forms
         </a>
-        <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
+        <div className='w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0'>
           <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
-            <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>
+            <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl'>
               Create and account
             </h1>
             <form className='space-y-4 md:space-y-6' onSubmit={handleSignup}>
               <div>
                 <label
                   htmlFor='name'
-                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                  className='block mb-2 text-sm font-medium text-gray-900'
                 >
                   Username
                 </label>
@@ -80,7 +80,7 @@ const SignUp = () => {
                   type='text'
                   name='name'
                   id='name'
-                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5'
                   placeholder='username'
                   ref={name}
                   required
@@ -89,7 +89,7 @@ const SignUp = () => {
               <div>
                 <label
                   htmlFor='email'
-                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                  className='block mb-2 text-sm font-medium text-gray-900'
                 >
                   Email
                 </label>
@@ -97,7 +97,7 @@ const SignUp = () => {
                   type='email'
                   name='email'
                   id='email'
-                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5'
                   placeholder='name@mail.com'
                   ref={email}
                   required
@@ -106,7 +106,7 @@ const SignUp = () => {
               <div>
                 <label
                   htmlFor='password'
-                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                  className='block mb-2 text-sm font-medium text-gray-900'
                 >
                   Password
                   <br />
@@ -122,14 +122,14 @@ const SignUp = () => {
                   id='password'
                   placeholder='••••••••'
                   ref={password}
-                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5'
                   required
                 />
               </div>
               <div>
                 <label
                   htmlFor='confirm-password'
-                  className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+                  className='block mb-2 text-sm font-medium text-gray-900'
                 >
                   Confirm password
                 </label>
@@ -139,21 +139,21 @@ const SignUp = () => {
                   id='confirm-password'
                   placeholder='••••••••'
                   ref={confirmPassword}
-                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5'
                   required
                 />
               </div>
               <button
                 type='submit'
-                className='w-full text-white bg-sign-up-color hover:bg-sign-up-hover-color focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                className='w-full text-white bg-sign-up-color hover:bg-sign-up-hover-color focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center'
               >
                 Create an account
               </button>
-              <p className='text-sm font-light text-gray-500 dark:text-gray-400'>
+              <p className='text-sm font-light text-gray-500'>
                 Already have an account?{' '}
                 <NavLink
                   to={'/login'}
-                  className='font-medium hover:underline dark:text-blue-500  text-sign-up-color hover:text-sign-up-hover-color'
+                  className='font-medium hover:underline text-sign-up-color hover:text-sign-up-hover-color'
                 >
                   Login here
                 </NavLink>
