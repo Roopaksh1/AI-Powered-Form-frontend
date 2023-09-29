@@ -1,7 +1,14 @@
+import { useContext } from 'react';
 import upload_logo from '../../assets/images/upload_logo.png';
+import { AuthContext } from '../../App';
+import { Navigate } from 'react-router-dom';
 
 const Dashboard = () => {
-  return (
+  const { user } = useContext(AuthContext);
+
+  return !user.auth ? (
+    <Navigate to={'/login'} />
+  ) : (
     <div className='flex flex-col justify-center items-center font-Roboto'>
       <div className='flex flex-col items-center border-2 bg-slate-100 w-[100%] min-h-[40vh]'>
         <h2 className='text-xl mt-4'>Start a new form</h2>
