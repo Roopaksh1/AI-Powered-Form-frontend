@@ -5,8 +5,10 @@ import { NavLink, Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { API_CLIENT } from '../../utils/api';
 import { POST_USER_LOGIN_URL } from '../../utils/constant';
+import useTitle from '../../hooks/useTitle';
 
 const Login = () => {
+  useTitle('Login | AI Forms');
   const { user, setUser } = useContext(AuthContext);
   const email = useRef();
   const password = useRef();

@@ -5,8 +5,10 @@ import { AuthContext } from '../../App';
 import { API_CLIENT } from '../../utils/api';
 import { POST_USER_REGISTER_URL } from '../../utils/constant';
 import { toast } from 'react-toastify';
+import useTitle from '../../hooks/useTitle';
 
 const SignUp = () => {
+  useTitle('Signup | AI Forms');
   const { user, setUser } = useContext(AuthContext);
   const name = useRef();
   const email = useRef();

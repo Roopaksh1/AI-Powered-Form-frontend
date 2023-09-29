@@ -2,8 +2,10 @@ import section1 from '../../assets/images/section1.png';
 import section2 from '../../assets/images/section2.png';
 import section3 from '../../assets/images/section3.png';
 import { Link } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const Home = () => {
+  useTitle('Home | AI Forms');
   return (
     <main className='font-Roboto text-white'>
       <section className='bg-home-section1-bg px-10 py-10 lg:px-0 lg:flex-row flex flex-col items-center'>

@@ -2,8 +2,10 @@ import { useContext } from 'react';
 import upload_logo from '../../assets/images/upload_logo.png';
 import { AuthContext } from '../../App';
 import { Navigate } from 'react-router-dom';
+import useTitle from '../../hooks/useTitle';
 
 const Dashboard = () => {
+  useTitle('Dashboard | AI Forms');
   const { user } = useContext(AuthContext);
 
   return !user.auth ? (
