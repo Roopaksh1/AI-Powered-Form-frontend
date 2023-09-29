@@ -1,9 +1,9 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import Router from './Router';
 import { ToastContainer, toast } from 'react-toastify';
-import { API_CLIENT } from './utils/api';
 import { GET_USER_URL } from './utils/constant';
 import useFetch from './hooks/useFetch';
+import Loading from './components/Loading';
 
 export const AuthContext = createContext({
   user: {
@@ -21,7 +21,9 @@ function App() {
   } else if (error) {
     toast.error(error, { toastId: 0 });
   }
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <AuthContext.Provider value={{ user, setUser }}>
       <Router />
       <ToastContainer
