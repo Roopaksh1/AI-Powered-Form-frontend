@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Router from './Router';
 import { ToastContainer, toast } from 'react-toastify';
 import { GET_USER_URL } from './utils/constant';
@@ -16,11 +16,13 @@ export const AuthContext = createContext({
 function App() {
   const [user, setUser] = useState({ auth: false, name: '' });
   const { data, loading, error } = useFetch(GET_USER_URL);
-  if (data) {
-    setUser({ auth: true, name: data.name });
-  } else if (error) {
-    toast.error(error, { toastId: 0 });
-  }
+  useEffect(() => {
+    if (data) {
+      setUser({ auth: true, name: data.name });
+    } else if (error) {
+      toast.error(error, { toastId: 0 });
+    }
+  }, [data, error]);
   return loading ? (
     <Loading />
   ) : (

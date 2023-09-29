@@ -13,8 +13,8 @@ const useFetch = (url) => {
           setData(res.data);
         })
         .catch((err) => {
-          if (err?.response?.status === '401') {
-            setError('Unauthorized');
+          if (err?.response?.status == '401') {
+            setError('Please login');
           } else if (err.request) {
             setError('Server Error');
           }
