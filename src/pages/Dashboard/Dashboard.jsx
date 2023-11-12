@@ -1,12 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import upload_logo from '../../assets/images/upload_logo.png';
 import { AuthContext } from '../../App';
 import { Navigate } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
+import Form from './Form';
 
 const Dashboard = () => {
   useTitle('Dashboard | AI Forms');
   const { user } = useContext(AuthContext);
+  const textQuery = useRef('');
+  const imageQuery = useRef('');
 
   return !user.auth ? (
     <Navigate to={'/login'} />
@@ -20,6 +23,7 @@ const Dashboard = () => {
               type='text'
               placeholder='Enter your Query'
               className='rounded-md mt-1 p-1 pl-2 w-[15rem]'
+              ref={textQuery}
             />
           </div>
           <div className='text-2xl ml-8 mr-8 flex items-center'>
@@ -33,6 +37,7 @@ const Dashboard = () => {
             <input
               type='file'
               className='absolute top-2 left-2 opacity-0 w-[100%] h-[100%] cursor-pointer hover:opacity-50'
+              ref={imageQuery}
             />
           </div>
         </div>
@@ -40,11 +45,7 @@ const Dashboard = () => {
           <button type='button'>Generate</button>
         </div>
       </div>
-      <div className=' m-16 flex w-[75%] shadow-md min-h-[20vh] flex-col items-center justify-center border-t rounded-lg'>
-        <h3 className='text-sm text-center lg:text-start md:text-xl lg:text-xl text-gray-800'>
-          No forms yet
-        </h3>
-      </div>
+      <Form />
     </div>
   );
 };
