@@ -4,12 +4,56 @@ import { AuthContext } from '../../App';
 import { Navigate } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
 import Form from './Form';
+import { API_CLIENT } from '../../utils/api';
+import { GET_QUERY_RESPONSE_URL } from '../../utils/constant';
+import { toast } from 'react-toastify';
+import Tesseract from 'tesseract.js';
 
 const Dashboard = () => {
   useTitle('Dashboard | AI Forms');
   const { user } = useContext(AuthContext);
   const textQuery = useRef('');
   const imageQuery = useRef('');
+
+  const getFormDetails = async () => {
+    if (textQuery.current.value != '') {
+      try {
+        const response = await API_CLIENT.get(
+          GET_QUERY_RESPONSE_URL + '/text/' + textQuery.current.value
+        );
+        console.log(response);
+      } catch (err) {
+        if (err?.response?.status == '401') {
+          toast.error('Please Login', { toastId: 200 });
+        } else if (err.request) {
+          toast.error('Server Error', { toastId: 300 });
+        }
+      }
+    } else {
+      const file = imageQuery.current.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onload = () => {
+        Tesseract.recognize(reader.result, 'eng').then(
+          async ({ data: { text } }) => {
+            try {
+              const response = await API_CLIENT.get(
+                GET_QUERY_RESPONSE_URL + '/image/' + text
+              );
+              console.log(response);
+            } catch (err) {
+              if (err?.response?.status == '401') {
+                toast.error('Please Login', { toastId: 200 });
+              } else if (err.request) {
+                toast.error('Server Error', { toastId: 300 });
+              }
+            }
+          }
+        );
+      };
+    }
+  };
 
   return !user.auth ? (
     <Navigate to={'/login'} />
@@ -37,12 +81,15 @@ const Dashboard = () => {
             <input
               type='file'
               className='absolute top-2 left-2 opacity-0 w-[100%] h-[100%] cursor-pointer hover:opacity-50'
+              accept='image/*'
               ref={imageQuery}
             />
           </div>
         </div>
         <div className='text-center text-xl flex items-center justify-center w-[10rem] h-[2rem] my-5 rounded-md bg-sky-400 hover:bg-sky-500'>
-          <button type='button'>Generate</button>
+          <button type='button' onClick={getFormDetails}>
+            Generate
+          </button>
         </div>
       </div>
       <Form />
