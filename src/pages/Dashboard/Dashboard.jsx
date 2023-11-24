@@ -3,11 +3,11 @@ import upload_logo from '../../assets/images/upload_logo.png';
 import { AuthContext } from '../../App';
 import { Navigate } from 'react-router-dom';
 import useTitle from '../../hooks/useTitle';
-import Form from './Form';
 import { API_CLIENT } from '../../utils/api';
 import { GET_QUERY_RESPONSE_URL } from '../../utils/constant';
 import { toast } from 'react-toastify';
 import Tesseract from 'tesseract.js';
+import FormList from './FormList';
 
 const Dashboard = () => {
   useTitle('Dashboard | AI Forms');
@@ -17,18 +17,19 @@ const Dashboard = () => {
 
   const getFormDetails = async () => {
     if (textQuery.current.value != '') {
-      try {
-        const response = await API_CLIENT.get(
-          GET_QUERY_RESPONSE_URL + '/text/' + textQuery.current.value
-        );
-        console.log(response);
-      } catch (err) {
-        if (err?.response?.status == '401') {
-          toast.error('Please Login', { toastId: 200 });
-        } else if (err.request) {
-          toast.error('Server Error', { toastId: 300 });
-        }
-      }
+      API_CLIENT.get(
+        GET_QUERY_RESPONSE_URL + '/query/' + textQuery.current.value
+      )
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          if (err?.response?.status == '401') {
+            toast.error('Please Login', { toastId: 200 });
+          } else if (err.request) {
+            toast.error('Server Error', { toastId: 300 });
+          }
+        });
     } else {
       const file = imageQuery.current.files[0];
       if (!file) return;
@@ -37,18 +38,17 @@ const Dashboard = () => {
       reader.onload = () => {
         Tesseract.recognize(reader.result, 'eng').then(
           async ({ data: { text } }) => {
-            try {
-              const response = await API_CLIENT.get(
-                GET_QUERY_RESPONSE_URL + '/image/' + text
-              );
-              console.log(response);
-            } catch (err) {
-              if (err?.response?.status == '401') {
-                toast.error('Please Login', { toastId: 200 });
-              } else if (err.request) {
-                toast.error('Server Error', { toastId: 300 });
-              }
-            }
+            API_CLIENT.get(GET_QUERY_RESPONSE_URL + '/query/' + text)
+              .then((res) => {
+                console.log(res.data);
+              })
+              .catch((err) => {
+                if (err?.response?.status == '401') {
+                  toast.error('Please Login', { toastId: 200 });
+                } else if (err.request) {
+                  toast.error('Server Error', { toastId: 300 });
+                }
+              });
           }
         );
       };
@@ -92,7 +92,7 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-      <Form />
+      <FormList />
     </div>
   );
 };

@@ -10,6 +10,7 @@ export const AuthContext = createContext({
   user: {
     auth: false,
     name: '',
+    id: '',
   },
   setUser: () => {},
   logOut: () => {},
@@ -33,7 +34,7 @@ function App() {
   };
   useEffect(() => {
     if (data) {
-      setUser({ auth: true, name: data.name });
+      setUser({ auth: true, name: data.name, id: data._id });
     } else if (error) {
       toast.error(error, { toastId: 0 });
     }

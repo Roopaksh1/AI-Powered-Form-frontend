@@ -6,6 +6,7 @@ import { useRef } from 'react';
 const Admin = () => {
   const category = useRef('');
   const name = useRef('');
+  const component = useRef('');
   const label = useRef('');
   const isReq = useRef('');
   const password = useRef('');
@@ -14,8 +15,9 @@ const Admin = () => {
     const formData = {
       category: category.current.value,
       name: name.current.value,
+      component: component.current.value,
       label: label.current.value,
-      isReq: isReq.current.checked,
+      isRequired: isReq.current.checked,
     };
     API_CLIENT.post(POST_FORM_URL, {
       password: password.current.value,
@@ -23,14 +25,14 @@ const Admin = () => {
     })
       .then((res) => {
         if (res.status == 200) {
-          toast.success('Database Updated');
+          toast.success('Database Updated', { toastId: 12333333 });
         }
       })
       .catch((err) => {
         if (err?.response?.status == '401') {
-          toast.error('Unauthorized');
+          toast.error('Unauthorized', { toastId: 123333 });
         } else if (err.request) {
-          toast.error('Server Error');
+          toast.error('Server Error', { toastId: 12333 });
         }
       });
   };
@@ -63,6 +65,21 @@ const Admin = () => {
           id='name'
           className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
           placeholder='name'
+          required
+        />
+      </div>
+      <div className='mb-5'>
+        <label
+          htmlFor='component'
+          className='block mb-2 text-sm font-medium text-gray-900'
+        >
+          Component
+        </label>
+        <input
+          ref={component}
+          id='component'
+          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+          placeholder='Component'
           required
         />
       </div>

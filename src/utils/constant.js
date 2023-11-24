@@ -9,3 +9,5 @@ export const POST_USER_URL = import.meta.env.VITE_API_URL + '/v1/user';
 export const DELETE_USER_URL = import.meta.env.VITE_API_URL + '/v1/user';
 export const GET_QUERY_RESPONSE_URL = import.meta.env.VITE_API_URL + '/v1/form';
 export const POST_FORM_URL = import.meta.env.VITE_API_URL + '/v1/form';
+export const GET_FORM_URL = import.meta.env.VITE_API_URL + '/v1/form';
+export const HOST_URL = 'http://localhost:5173/';
