@@ -8,6 +8,7 @@ import About from './pages/About/About';
 import SignUp from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Admin from './pages/Admin/Admin';
+import FormPage from './pages/Form/FormPage';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -22,6 +23,7 @@ const Router = () => {
         { path: 'login', element: <Login /> },
         { path: 'signup', element: <SignUp /> },
         { path: 'admin', element: <Admin /> },
+        { path: 'form/:userID/:formID', element: <FormPage /> },
       ],
     },
     {

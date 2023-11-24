@@ -28,6 +28,8 @@ const Dashboard = () => {
         .catch((err) => {
           if (err?.response?.status == '401') {
             toast.error('Please Login', { toastId: 200 });
+          } else if (err?.response?.status == '404') {
+            toast.error('Query Not Found', { toastId: 200 });
           } else if (err.request) {
             toast.error('Server Error', { toastId: 300 });
           }
@@ -47,6 +49,8 @@ const Dashboard = () => {
               .catch((err) => {
                 if (err?.response?.status == '401') {
                   toast.error('Please Login', { toastId: 200 });
+                } else if (err?.response?.status == '404') {
+                  toast.error('Query Not Found', { toastId: 200 });
                 } else if (err.request) {
                   toast.error('Server Error', { toastId: 300 });
                 }

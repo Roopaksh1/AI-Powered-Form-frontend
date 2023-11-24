@@ -15,6 +15,8 @@ const useFetch = (url) => {
         .catch((err) => {
           if (err?.response?.status == '401') {
             setError('Please login');
+          } else if (err?.response?.status == '404') {
+            setError('Not Found');
           } else if (err.request) {
             setError('Server Error');
           }

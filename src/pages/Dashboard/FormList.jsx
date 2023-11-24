@@ -60,7 +60,7 @@ const FormList = ({ form, setForm }) => {
               View
             </button>
             <CopyToClipboard
-              text={HOST_URL + user.id + '/' + f._id}
+              text={HOST_URL + 'form/' + user.id + '/' + f._id}
               onCopy={() => toast.success('Link Copied', { toastId: 9809 })}
             >
               <button className='mr-2 md:p-1 md:hover:bg-[#efedf2]'>
