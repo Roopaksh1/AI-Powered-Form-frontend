@@ -8,9 +8,11 @@ import { GET_QUERY_RESPONSE_URL } from '../../utils/constant';
 import { toast } from 'react-toastify';
 import Tesseract from 'tesseract.js';
 import FormList from './FormList';
+import { useState } from 'react';
 
 const Dashboard = () => {
   useTitle('Dashboard | AI Forms');
+  const [form, setForm] = useState([]);
   const { user } = useContext(AuthContext);
   const textQuery = useRef('');
   const imageQuery = useRef('');
@@ -21,7 +23,7 @@ const Dashboard = () => {
         GET_QUERY_RESPONSE_URL + '/query/' + textQuery.current.value
       )
         .then((res) => {
-          console.log(res.data);
+          setForm([...form, res.data.formSchema]);
         })
         .catch((err) => {
           if (err?.response?.status == '401') {
@@ -40,7 +42,7 @@ const Dashboard = () => {
           async ({ data: { text } }) => {
             API_CLIENT.get(GET_QUERY_RESPONSE_URL + '/query/' + text)
               .then((res) => {
-                console.log(res.data);
+                setForm([...form, res.data.formSchema]);
               })
               .catch((err) => {
                 if (err?.response?.status == '401') {
@@ -92,7 +94,7 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-      <FormList />
+      <FormList form={form} setForm={setForm} />
     </div>
   );
 };

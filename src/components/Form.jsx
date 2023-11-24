@@ -3,7 +3,6 @@ import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template/form-template';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { useRef } from 'react';
 
 const Form = ({ schema, setView }) => {
   const closeForm = () => {

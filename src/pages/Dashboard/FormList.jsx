@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import useFetch from '../../hooks/useFetch';
-import { GET_FORM_URL, HOST_URL } from '../../utils/constant';
+import { DELETE_FORM_URL, GET_FORM_URL, HOST_URL } from '../../utils/constant';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
@@ -9,10 +9,10 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { useContext } from 'react';
 import { AuthContext } from '../../App';
 import Form from '../../components/Form';
+import { API_CLIENT } from '../../utils/api';
 
-const FormList = () => {
+const FormList = ({ form, setForm }) => {
   const { user } = useContext(AuthContext);
-  const [form, setForm] = useState([]);
   const [view, setView] = useState(null);
   const { data, loading, error } = useFetch(GET_FORM_URL);
   useEffect(() => {
@@ -22,6 +22,25 @@ const FormList = () => {
       toast.error(error, { toastId: 66 });
     }
   }, [data, error]);
+
+  const showForm = (schema) =>
+    setView(<Form schema={schema} setView={setView} />);
+
+  const deleteForm = (id) => {
+    API_CLIENT.delete(DELETE_FORM_URL + '/' + id)
+      .then((res) => {
+        toast.success('Deleted Successfully', { toastId: 58865 });
+        const doc = form.filter((f) => f._id != id);
+        setForm(doc);
+      })
+      .catch((err) => {
+        if (err?.response?.status == '401') {
+          toast.error('Please Login', { toastId: 200 });
+        } else if (err.request) {
+          toast.error('Server Error', { toastId: 300 });
+        }
+      });
+  };
 
   const formMap = () => {
     return form.map((f) => {
@@ -34,7 +53,7 @@ const FormList = () => {
           <div className='text-sm font-Roboto'>
             <button
               className='mr-2 md:hover:bg-[#efedf2] md:p-1'
-              onClick={() => setView(<Form schema={f} setView={setView} />)}
+              onClick={() => showForm(f)}
             >
               <i className='fa-solid fa-eye text-green-400'></i>
               <br />
@@ -50,7 +69,10 @@ const FormList = () => {
                 Share
               </button>
             </CopyToClipboard>
-            <button className='md:hover:bg-[#efedf2] md:p-1'>
+            <button
+              className='md:hover:bg-[#efedf2] md:p-1'
+              onClick={() => deleteForm(f._id)}
+            >
               <i className='fa-solid fa-trash text-red-500'></i>
               <br />
               Delete
