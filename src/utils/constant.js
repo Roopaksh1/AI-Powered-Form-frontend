@@ -12,4 +12,4 @@ export const GET_QUERY_RESPONSE_URL = import.meta.env.VITE_API_URL + '/v1/form';
 export const POST_FORM_URL = import.meta.env.VITE_API_URL + '/v1/form';
 export const GET_FORM_URL = import.meta.env.VITE_API_URL + '/v1/form';
 export const DELETE_FORM_URL = import.meta.env.VITE_API_URL + '/v1/form';
-export const HOST_URL = 'http://localhost:5173/';
+export const HOST_URL = 'https://aiform.netlify.app/';
