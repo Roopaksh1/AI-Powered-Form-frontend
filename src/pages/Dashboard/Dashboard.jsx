@@ -42,7 +42,7 @@ const Dashboard = () => {
       reader.onload = () => {
         Tesseract.recognize(reader.result, 'eng').then(
           async ({ data: { text } }) => {
-            API_CLIENT.get(GET_QUERY_RESPONSE_URL + '/query/' + text)
+            API_CLIENT.get(GET_QUERY_RESPONSE_URL + '/query/' + text.substring(0, 30))
               .then((res) => {
                 setForm([...form, res.data.formSchema]);
               })
