@@ -26,7 +26,7 @@ function App() {
       toast.success(res.data.message, { toastId: 10 });
     } catch (err) {
       if (err?.response?.status == '401') {
-        toast.error('Please Login', { toastId: 20 });
+        // toast.error('Please Login', { toastId: 20 });
       } else if (err.request) {
         toast.error('Server Error', { toastId: 30 });
       }
@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     if (data) {
       setUser({ auth: true, name: data.name, id: data._id });
-    } else if (error) {
+    } else if (error != 'Please login') {
       toast.error(error, { toastId: 0 });
     }
   }, [data, error]);

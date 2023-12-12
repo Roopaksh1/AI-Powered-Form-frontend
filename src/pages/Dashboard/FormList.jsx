@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import useFetch from '../../hooks/useFetch';
-import { DELETE_FORM_URL, GET_FORM_URL, HOST_URL } from '../../utils/constant';
+import {
+  DELETE_FORM_URL,
+  GET_FORM_URL,
+  GET_RESPONSE_URL,
+  HOST_URL,
+} from '../../utils/constant';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
@@ -10,6 +15,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../App';
 import Form from '../../components/Form';
 import { API_CLIENT } from '../../utils/api';
+import Responses from './Responses';
 
 const FormList = ({ form, setForm }) => {
   const { user } = useContext(AuthContext);
@@ -42,6 +48,11 @@ const FormList = ({ form, setForm }) => {
       });
   };
 
+  const showResponses = async (id) => {
+    const response = await API_CLIENT.get(GET_RESPONSE_URL + '/' + id);
+    setView(<Responses response={response.data} setView={setView} />);
+  };
+
   const formMap = () => {
     return form.map((f) => {
       return (
@@ -70,12 +81,20 @@ const FormList = ({ form, setForm }) => {
               </button>
             </CopyToClipboard>
             <button
-              className='md:hover:bg-[#efedf2] md:p-1'
+              className='md:hover:bg-[#efedf2] md:p-1 mr-2'
               onClick={() => deleteForm(f._id)}
             >
               <i className='fa-solid fa-trash text-red-500'></i>
               <br />
               Delete
+            </button>
+            <button
+              className='md:hover:bg-[#efedf2] md:p-1'
+              onClick={() => showResponses(f._id)}
+            >
+              <i className='fa-solid fa-square-poll-vertical text-blue-500'></i>
+              <br />
+              Responses
             </button>
           </div>
         </div>

@@ -3,8 +3,13 @@ import { componentMapper } from '@data-driven-forms/mui-component-mapper';
 import FormTemplate from '@data-driven-forms/mui-component-mapper/form-template/form-template';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { API_CLIENT } from '../utils/api';
+import { POST_RESPONSE_URL } from '../utils/constant';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 const Form = ({ schema, setView = null }) => {
+  const { userID, formID } = useParams();
   const closeForm = () => {
     setView(null);
   };
@@ -23,7 +28,21 @@ const Form = ({ schema, setView = null }) => {
             schema={schema}
             componentMapper={componentMapper}
             FormTemplate={FormTemplate}
-            onSubmit={console.log}
+            onSubmit={async (value) => {
+              if (Object.keys(value).length == 0) return;
+              try {
+                await API_CLIENT.post(
+                  POST_RESPONSE_URL + '/' + userID + '/' + formID,
+                  value
+                );
+              } catch (err) {
+                if (err?.response?.status == '400') {
+                  toast.error('Invalid Request', { toastId: 201 });
+                } else if (err.request) {
+                  toast.error('Server Error', { toastId: 301 });
+                }
+              }
+            }}
           />
         </div>
       </div>
