@@ -21,7 +21,7 @@ const Login = () => {
     })
       .then((res) => {
         toast.success('You have logged in', { toastId: 1 });
-        setUser({ auth: true, name: res.data.name });
+        setUser({ auth: true, name: res.data.name, id: res.data._id });
       })
       .catch((err) => toast.error(err.response.data.message, { toastId: 2 }));
   };
