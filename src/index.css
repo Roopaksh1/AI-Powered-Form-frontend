@@ -6,3 +6,7 @@
   font-family: 'Robot';
   src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 }
+
+.exit-msg {
+  font-size: 30rem;
+}
